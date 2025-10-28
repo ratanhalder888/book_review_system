@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
-
+ 
 class Book(models.Model):
 
     GENRE_CHOICES = [

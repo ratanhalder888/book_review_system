@@ -1,8 +1,6 @@
-{% extends "book/base.html" %}
-{% block title %}Books List{% endblock title %}
-
+{% extends "book/base.html" %} {% block title %}Books List{% endblock title %}
 {% block content %}
-<div class="row mb-4">
+<!-- <div class="row mb-4">
     <div class="col">
         <div class="btn-group">
             <a href="{% url 'book-list' %}" class="btn btn-outline-primary
@@ -15,16 +13,56 @@
              {% if request.GET.genre == 'history' %}active{% endif %}">History</a>
             <a href="?genre=science" class="btn btn-outline-primary 
              {% if request.GET.genre == 'science' %}active{% endif %}">Science</a>
+            <a href="?genre=technology" class="btn btn-outline-primary 
+             {% if request.GET.genre == 'technology' %}active{% endif %}">Technology</a>
         </div>
     </div>
+</div> -->
+
+<div class="flex space-x-2 mb-6">
+  <a
+    href="{% url 'book-list' %}"
+    class="px-3 py-1 border rounded-md {% if not request.GET.genre %}bg-blue-500 text-white {% else %}border-blue-500 text-blue-500{% endif %}"
+    >All</a
+  >
+  <a
+    href="?genre=fiction"
+    class="px-3 py-1 border rounded-md {% if request.GET.genre == 'fiction' %}bg-blue-500 text-white {% else %}border-blue-500 text-blue-500{% endif %}"
+    >Fiction</a
+  >
+  <a
+    href="?genre=non_fiction"
+    class="px-3 py-1 border rounded-md {% if request.GET.genre == 'non_fiction' %}bg-blue-500 text-white {% else %}border-blue-500 text-blue-500{% endif %}"
+    >Non-Fiction</a
+  >
+  <a
+    href="?genre=science"
+    class="px-3 py-1 border rounded-md {% if request.GET.genre == 'science' %}bg-blue-500 text-white {% else %}border-blue-500 text-blue-500{% endif %}"
+    >Science</a
+  >
+  <a
+    href="?genre=technology"
+    class="px-3 py-1 border rounded-md {% if request.GET.genre == 'technology' %}bg-blue-500 text-white {% else %}border-blue-500 text-blue-500{% endif %}"
+    >Technology</a
+  >
+  <a
+    href="?genre=history"
+    class="px-3 py-1 border rounded-md {% if request.GET.genre == 'history' %}bg-blue-500 text-white {% else %}border-blue-500 text-blue-500{% endif %}"
+    >History</a
+  >
+  <a
+    href="?genre=other"
+    class="px-3 py-1 border rounded-md {% if request.GET.genre == 'other' %}bg-blue-500 text-white {% else %}border-blue-500 text-blue-500{% endif %}"
+    >Other</a
+  >
+  <!-- and so on -->
 </div>
 
-
-<div class="row row-cols-1 row-cols-md-3 g-4">
+<!-- <div class="row row-cols-1 row-cols-md-3 g-4">
     {% for book in books %}
     <div class="col">
         <div class="card h-100">
-            <div class="card-body">  
+            <div class="card-body">
                 <h5 class="card-title">{{ book.title }}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">By {{ book.author }}</h6>
                 <p class="card-text">{{ book.description | truncatewords:30 }}</p>
@@ -39,7 +77,24 @@
         <p>No Books Found.</p>
     </div>
     {% endfor %}
+</div> -->
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  {% for book in books %}
+  <div class="bg-white shadow rounded-lg p-4">
+    <h5 class="text-lg font-bold mb-2">{{ book.title }}</h5>
+    <h6 class="text-gray-500 mb-3">By {{ book.author }}</h6>
+    <p class="text-sm text-gray-700 mb-3">
+      {{ book.description|truncatewords:30 }}
+    </p>
+    <a
+      href="{% url 'book-detail' book.pk %}"
+      class="inline-block bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 text-sm"
+      >View Details</a>
+  </div>
+  {% empty %}
+  <p class="text-center text-gray-500 col-span-3">No Books Found.</p>
+  {% endfor %}
 </div>
+
 {% endblock content %}
-
-

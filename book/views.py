@@ -49,4 +49,8 @@ def book_delete(request, pk):
     book.delete()
     messages.success(request, 'Book deleted successfully! ')
     return redirect('book-list')
+
+
+def home_page(request):
+    return render(request, 'book/home.html')
     

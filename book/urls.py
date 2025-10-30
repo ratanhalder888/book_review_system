@@ -3,6 +3,7 @@ from book import views
 
 urlpatterns = [
     path('', views.book_list, name='book-list'),
+    path('home/', views.home_page, name='home-page'),
     path('book/<int:pk>/', views.book_detail, name='book-detail'),
     path('book/new/', views.book_create, name='book-create'),
     path('book/<int:pk>/edit/', views.book_update, name='book-update'),

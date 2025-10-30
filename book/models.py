@@ -7,6 +7,9 @@ from django.core.validators import MinValueValidator, MaxValueValidator
  
 class Book(models.Model):
 
+    title = models.CharField(max_length=200)
+    author = models.CharField(max_length=200)
+    description = models.TextField()
     GENRE_CHOICES = [
     ('fiction', 'Fiction'),
     ('non_fiction', 'Non-Fiction'),
@@ -15,9 +18,6 @@ class Book(models.Model):
     ('history', 'History'),
     ('other', 'Other'),
     ]
-    title = models.CharField(max_length=200)
-    author = models.CharField(max_length=200)
-    description = models.TextField()
     genre = models.CharField(max_length=20, choices=GENRE_CHOICES)
     isbn = models.CharField('ISBN', max_length=13, unique=True)
     publication_date = models.DateField()

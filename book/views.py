@@ -53,4 +53,10 @@ def book_delete(request, pk):
 
 def home_page(request):
     return render(request, 'book/home.html')
+
+def registration_page(request):
+    return render(request, 'book/registration.html')
+
+def login_page(request):
+    return render(request, "book/login.html")
     
